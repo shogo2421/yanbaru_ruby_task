@@ -7,7 +7,7 @@ plans = [
 
 #プランメニュー表示・選択
 plans.each.with_index(1) do |plan, i|
-  puts "#{i}. #{plan[:place]}"
+  puts "#{i}. #{plan[:place]} (¥#{plan[:price]})"
 end
 
 puts "プランを選択"
