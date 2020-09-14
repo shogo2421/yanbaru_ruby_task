@@ -1,3 +1,10 @@
+#プランメニュー表示・選択
+def plan_menu
+  @plans.each.with_index(1) do |plan, i|
+    puts "#{i}. #{plan[:place]} (¥#{plan[:price]})"
+  end
+end
+
 #選択されたプランを決定するメソッド
 def select_plan(plan)
   case plan
@@ -30,17 +37,16 @@ end
 	{place: "九州旅行", price: 15000}
 ]
 
-#プランメニュー表示・選択
-@plans.each.with_index(1) do |plan, i|
-  puts "#{i}. #{plan[:place]} (¥#{plan[:price]})"
-end
-
 #以下、表示画面用
 #-------------------------------------------------------------------------------------------------
+
+puts "旅行プランを選択してください"
+plan_menu
+
 puts "プランを選択"
 select_plan(gets.to_i)
 
-puts "人数を選択"
+puts "人数を入力"
 select_people(gets.to_i)
 
 puts "合計料金：¥#{@total.floor}円"
