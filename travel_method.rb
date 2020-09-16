@@ -6,13 +6,13 @@ def plan_menu
 end
 
 #選択されたプランを決定するメソッド
-def select_plan(plan)
-  case plan
+def select_plan(plan_num)
+  case plan_num
   when 1..@plans.size
-    puts "#{@plans[plan - 1][:place]}ですね、何人で行きますか？"
-    @price = @plans[plan - 1][:price]
+    puts "#{@plans[plan_num - 1][:place]}ですね、何人で行きますか？"
+    @price = @plans[plan_num - 1][:price]
   else
-    puts "入力が無効です：入力値 #{plan}"
+    puts "入力が無効です：入力値 #{plan_num}"
     exit
   end
 end
@@ -31,11 +31,13 @@ def select_people(people)
 end
 
 #旅行プラン一覧
-@plans = [
-	{place: "沖縄旅行", price: 10000}, 
-	{place: "北海道旅行", price: 20000}, 
-	{place: "九州旅行", price: 15000}
-]
+def plan_index
+  @plans = [
+    {place: "沖縄旅行", price: 10000}, 
+    {place: "北海道旅行", price: 20000}, 
+    {place: "九州旅行", price: 15000}
+  ]
+end
 
 #以下、表示画面用
 #-------------------------------------------------------------------------------------------------
