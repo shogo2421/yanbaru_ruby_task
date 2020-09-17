@@ -9,7 +9,6 @@ end
 
 #プランメニュー表示・選択
 def plan_menu
-  puts plan_index
   plan_index.each.with_index(1) do |plan, i|
     puts "#{i}. #{plan[:place]} (¥#{plan[:price]})"
   end
