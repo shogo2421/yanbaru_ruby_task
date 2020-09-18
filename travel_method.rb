@@ -1,25 +1,23 @@
 #旅行プラン一覧
-def plan_index
-   [
+plan_index = [
     {place: "沖縄旅行", price: 10000}, 
     {place: "北海道旅行", price: 20000}, 
     {place: "九州旅行", price: 15000}
   ]
-end
 
 #プランメニュー表示・選択
-def plan_menu
+def plan_menu(plan_index)
   plan_index.each.with_index(1) do |plan, i|
     puts "#{i}. #{plan[:place]} (¥#{plan[:price]})"
   end
 end
 
 #選択されたプランを決定するメソッド
-def select_plan(plan_num)
+def select_plan(plan_num, plan_index)
   case plan_num
   when 1..plan_index.size
     puts "#{plan_index[plan_num - 1][:place]}ですね、何人で行きますか？"
-    @price = plan_index[plan_num - 1][:price]
+    price = plan_index[plan_num - 1][:price]
   else
     puts "入力が無効です：入力値 #{plan_num}"
     exit
@@ -27,12 +25,12 @@ def select_plan(plan_num)
 end
 
 #選択された人数に応じて料金を計算するメソッド
-def select_people(people)
+def select_people(people, price)
   if people >= 5
     puts "5人以上なので10%割引となります"
-    @total = @price * people * 0.9
+    total = price * people * 0.9
   elsif people >= 1
-    @total = @price * people
+    total = price * people
   else
     puts "入力が無効です：入力値 #{people}"
     exit
@@ -43,12 +41,12 @@ end
 #-------------------------------------------------------------------------------------------------
 
 puts "旅行プランを選択してください"
-plan_menu
+plan_menu(plan_index)
 
 puts "プランを選択"
-select_plan(gets.to_i)
+price = select_plan(gets.to_i, plan_index)
 
 puts "人数を入力"
-select_people(gets.to_i)
+total = select_people(gets.to_i, price)
 
-puts "合計料金：¥#{@total.floor}円"
+puts "合計料金：¥#{total.floor}円"
