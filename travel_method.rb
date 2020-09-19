@@ -13,7 +13,8 @@ def plan_menu(plan_index)
 end
 
 #選択されたプランを決定するメソッド
-def select_plan(plan_num, plan_index)
+def select_plan(plan_index)
+  plan_num = gets.to_i
   case plan_num
   when 1..plan_index.size
     puts "#{plan_index[plan_num - 1][:place]}ですね、何人で行きますか？"
@@ -25,7 +26,8 @@ def select_plan(plan_num, plan_index)
 end
 
 #選択された人数に応じて料金を計算するメソッド
-def select_people(people, price)
+def select_people(price)
+  people = gets.to_i
   if people >= 5
     puts "5人以上なので10%割引となります"
     total = price * people * 0.9
@@ -44,9 +46,9 @@ puts "旅行プランを選択してください"
 plan_menu(plan_index)
 
 puts "プランを選択"
-price = select_plan(gets.to_i, plan_index)
+price = select_plan(plan_index)
 
 puts "人数を入力"
-total = select_people(gets.to_i, price)
+total = select_people(price)
 
 puts "合計料金：¥#{total.floor}円"
