@@ -1,7 +1,7 @@
 outputs = [
-  %Q[puts "Hello World!"],
-  %Q[echo "Hello World!";],
-  %Q[System.out.println("Hello World!");]
+  'puts "Hello World!"',
+  'echo "Hello World!";',
+  'System.out.println("Hello World!");'
 ]
 
 languages = [
