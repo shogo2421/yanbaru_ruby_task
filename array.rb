@@ -11,7 +11,7 @@ languages = [
 ]
 
 puts "様々な言語のHello, World"
-
+puts
 languages.each do |language|
   case language
   when "Ruby"
