@@ -1,19 +1,24 @@
+outputs = [
+  %Q[puts "Hello World!"],
+  %Q[echo "Hello World!";],
+  %Q[System.out.println("Hello World!");]
+]
+
 languages = [
-  "puts Hello World!",
-  "echo Hello World!",
-  "System.out.println(Hello World!)"
+  "Ruby",
+  "PHP",
+  "Java"
 ]
 
 puts "様々な言語のHello, World"
 
-language =
-case language
-when Ruby
-  languages[0]
-when PHP
-  languages[1]
-when Java
-  languages[2]
-else
-  puts "無効な言語です"
+languages.each do |language|
+  case language
+  when "Ruby"
+    puts "#{language}:#{outputs[0]}"
+  when "PHP"
+    puts "#{language}:#{outputs[1]}"
+  when "Java"
+    puts "#{language}:#{outputs[2]}"
+  end
 end
