@@ -1,17 +1,21 @@
-people = {
-  name: "田中",
-  age: 30,
-  height: 160
-}
+people = [
+  {name: "田中", age: 30, height: 160},
+  {name: "佐藤", age: 70, height: 150},
+  {name: "鈴木", age: 10, height: 120}
+]
 
-people2 = {
-  name: "佐藤"
-  age: 70
-  height: 150
-}
+people.each do |human|
+  judge_age = human[:age] <= 64 ? "OK" : "NG"
+  judge_height = human[:height] >= 130 ? "OK" : "NG"
+  final_judge = judge_age == "OK" && judge_height == "OK" ? "ご利用いただけます" : "ご利用いただけません"
 
-people3 = {
-  name: "鈴木"
-  age: 10
-  height: 120
-}
+  puts <<~TEXT
+    ------------------------------
+    #{human[:name]}さん
+    年齢 #{human[:age]}歳 : 年齢確認#{judge_age}
+    身長 #{human[:height]}cm : 身長確認#{judge_height}
+
+    #{final_judge}
+  TEXT
+end
+puts "------------------------------"
