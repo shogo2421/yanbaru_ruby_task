@@ -5,7 +5,6 @@ class TODO
   end
 
   def add
-    @tasks = @task
   end
   
   def index
