@@ -20,5 +20,5 @@ class TODO
 end
 
 class TASK
-
+  puts task
 end
