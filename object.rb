@@ -1,5 +1,5 @@
-class TODO
-
+class Todo
+  attr_accessor :task
   def initialize(task)
     @task = task
   end
@@ -19,6 +19,11 @@ class TODO
   end
 end
 
-class TASK
-  puts task
+class Task
+  puts @tasks
 end
+
+task1 = Todo.new("筋トレ")
+puts task1.task
+task1.add
+task1.index
