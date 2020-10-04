@@ -1,33 +1,33 @@
+class Task
+  attr_accessor :name, :id, :detail
+  def initialize(params)
+    @task = params[:name]
+    @id = params[:id]
+    @detail = params[:detail]
+  end
+end
+
 class Todo
-  attr_accessor :task, :id, :detail
-  def initialize(task, id, detail)
-    @task = task
-    @id = id
-    @detail = detail
+  def initialize
+    @tasks = []
   end
 
-  def add
-    @tasks = @task
+  def add(task)
+    @tasks << task
   end
   
   def index
     @tasks.each do |task|
-      puts task
+      puts "id:#{task.id} #{task.name}(#{task.detail})"
     end
   end
 
-  def delete
-    @task.destroy
+  def delete(task)
+    @tasks[task].destroy
   end
 end
 
-class Task
-  puts @tasks
-end
-
-task1 = Todo.new("筋トレ", 1, "ベンチプレス")
-puts <<~TEXT
-#{task1.task}
-#{task1.id}
-#{task1.detail}
-TEXT
+todo = Todo.new
+task1 = Task.new(name: "筋トレ", id: 1, detail: "ベンチプレス")
+todo.add(task1)
+todo.index
