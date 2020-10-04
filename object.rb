@@ -31,3 +31,4 @@ todo = Todo.new
 task1 = Task.new(name: "筋トレ", id: 1, detail: "ベンチプレス")
 todo.add(task1)
 todo.index
+todo.delete(task1)
