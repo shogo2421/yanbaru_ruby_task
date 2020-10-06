@@ -1,8 +1,9 @@
 class Task
   attr_accessor :name, :id, :detail
-  def initialize(params)
+  @@count = 0
+  def initialize(**params)
+    @id = @@count += 1
     @task = params[:name]
-    @id = params[:id]
     @detail = params[:detail]
   end
 end
@@ -22,8 +23,9 @@ class Todo
     end
   end
 
-  def delete(task)
-    @tasks[task].destroy
+  def delete(id:)
+    task = @tasks.find{|task| task.id === id}
+    @tasks.delete(task)
   end
 end
 
@@ -31,4 +33,4 @@ todo = Todo.new
 task1 = Task.new(name: "筋トレ", id: 1, detail: "ベンチプレス")
 todo.add(task1)
 todo.index
-todo.delete(task1)
+todo.delete(id: 1)
