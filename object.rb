@@ -4,7 +4,7 @@ class Task
   @@count = 0
   def initialize(**params)
     @id = @@count += 1
-    @task = params[:name]
+    @name = params[:name]
     @detail = params[:detail]
   end
 end
@@ -31,8 +31,12 @@ class Todo
   #指定されたタスクの削除
   def delete(id:)
     task = @tasks.find{|task| task.id === id}
-    @tasks.delete(task)
-    puts "id:#{id}のタスクが削除されました。"
+    if task != nil
+      @tasks.delete(task)
+      puts "id:#{id}のタスクが削除されました。"
+    else
+      puts "タスクが存在しません。"
+    end
   end
 end
 
@@ -45,5 +49,7 @@ todo.add(task2)
 task3 = Task.new(name: "食事", detail: "ラーメン")
 todo.add(task3)
 todo.index
-todo.delete(id: 1)
+puts "削除するタスクidを選択して下さい"
+a = gets.to_i
+todo.delete(id: a)
 todo.index
