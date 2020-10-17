@@ -1,54 +1,55 @@
-#旅行プラン一覧
-plan_index = [
-  {place: "沖縄旅行", price: 10000}, 
-  {place: "北海道旅行", price: 20000}, 
-  {place: "九州旅行", price: 15000}
-]
-
-#プランメニュー表示・選択
-def plan_menu(plan_index)
-plan_index.each.with_index(1) do |plan, i|
-  puts "#{i}. #{plan[:place]} (¥#{plan[:price]})"
-end
+#タスクの作成
+class Task
+  attr_accessor :name, :id, :detail
+  @@count = 0
+  def initialize(**params)
+    @id = @@count += 1
+    @name = params[:name]
+    @detail = params[:detail]
+  end
 end
 
-#選択されたプランを決定するメソッド
-def select_plan(plan_index)
-plan_num = gets.to_i
-case plan_num
-when 1..plan_index.size
-  puts "#{plan_index[plan_num - 1][:place]}ですね、何人で行きますか？"
-  price = plan_index[plan_num - 1][:price]
-else
-  puts "入力が無効です：入力値 #{plan_num}"
-  exit
+class Todo
+  def initialize
+    @tasks = []
+  end
+
+  #作成されたタスクをタスク一覧の配列に格納
+  def add(task)
+    @tasks << task
+  end
+  
+  #タスク一覧を表示
+  def index
+    puts "タスク一覧"
+    @tasks.each do |task|
+      puts "id:#{task.id} #{task.name}(#{task.detail})"
+    end
+    puts "------------------------------------------------"
+  end
+
+  #指定されたタスクの削除
+  def delete(id:)
+    task = @tasks.find{|task| task.id === id}
+    if task != nil
+      @tasks.delete(task)
+      puts "id:#{id}のタスクが削除されました。"
+    else
+      puts "タスクが存在しません。"
+    end
+  end
 end
-end
 
-#選択された人数に応じて料金を計算するメソッド
-def select_people(price)
-people = gets.to_i
-if people >= 5
-  puts "5人以上なので10%割引となります"
-  total = price * people * 0.9
-elsif people >= 1
-  total = price * people
-else
-  puts "入力が無効です：入力値 #{people}"
-  exit
-end
-end
-
-#以下、表示画面用
-#-------------------------------------------------------------------------------------------------
-
-puts "旅行プランを選択してください"
-plan_menu(plan_index)
-
-puts "プランを選択"
-price = select_plan(plan_index)
-
-puts "人数を入力"
-total = select_people(price)
-
-puts "合計料金：¥#{total.floor}円"
+#以下、処理をするためのコード
+todo = Todo.new
+task1 = Task.new(name: "筋トレ", detail: "ベンチプレス")
+todo.add(task1)
+task2 = Task.new(name: "勉強", detail: "プログラミング")
+todo.add(task2)
+task3 = Task.new(name: "食事", detail: "ラーメン")
+todo.add(task3)
+todo.index
+puts "削除するタスクidを選択して下さい"
+a = gets.to_i
+todo.delete(id: a)
+todo.index
