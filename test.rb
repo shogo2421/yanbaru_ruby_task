@@ -14,7 +14,7 @@ class Todo
     @tasks = []
   end
 
-  #作成されたタスクをタスク一覧の配列に格納
+  #作成されたタスクをタスク一覧の配列に格納する
   def add(task)
     @tasks << task
   end
