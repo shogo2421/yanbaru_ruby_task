@@ -1,55 +1,43 @@
-#タスクの作成
-class Task
-  attr_accessor :name, :id, :detail
-  @@count = 0
-  def initialize(**params)
-    @id = @@count += 1
-    @name = params[:name]
-    @detail = params[:detail]
-  end
+#旅行プラン一覧
+plans = [
+	{place: "沖縄旅行", price: 10000}, 
+	{place: "北海道旅行", price: 20000}, 
+	{place: "九州旅行", price: 15000}
+]
+
+#プランメニュー表示・選択
+plans.each.with_index(1) do |plan, i|
+  puts "#{i}. #{plan[:place]} (¥#{plan[:price]})"
 end
 
-class Todo
-  def initialize
-    @tasks = []
-  end
+puts "プランを選択"
+select_plan = gets.to_i
 
-  #作成されたタスクをタスク一覧の配列に格納する
-  def add(task)
-    @tasks << task
-  end
-  
-  #タスク一覧を表示
-  def index
-    puts "タスク一覧"
-    @tasks.each do |task|
-      puts "id:#{task.id} #{task.name}(#{task.detail})"
-    end
-    puts "------------------------------------------------"
-  end
-
-  #指定されたタスクの削除
-  def delete(id:)
-    task = @tasks.find{|task| task.id === id}
-    if task != nil
-      @tasks.delete(task)
-      puts "id:#{id}のタスクが削除されました。"
-    else
-      puts "タスクが存在しません。"
-    end
-  end
+#プラン選択による条件分岐
+case select_plan
+when 1..plans.size
+	puts "#{plans[select_plan - 1][:place]}ですね、何人で行きますか？"
+	price = plans[select_plan - 1][:price]
+else
+	puts "入力が無効です：入力値 #{select_plan}"
+	exit
 end
 
-#以下、処理をするためのコード
-todo = Todo.new
-task1 = Task.new(name: "筋トレ", detail: "ベンチプレス")
-todo.add(task1)
-task2 = Task.new(name: "勉強", detail: "プログラミング")
-todo.add(task2)
-task3 = Task.new(name: "食事", detail: "ラーメン")
-todo.add(task3)
-todo.index
-puts "削除するタスクidを選択して下さい"
-a = gets.to_i
-todo.delete(id: a)
-todo.index
+#人数の選択
+puts "人数を選択"
+people = gets.to_i
+
+#人数選択による条件分岐
+if people >= 5
+	puts "5人以上なので10%割引となります"
+	total = price * people * 0.9
+elsif people >= 1
+  total = price * people
+else
+  puts "入力が無効です：入力値 #{people}"
+  exit
+end
+
+puts "合計料金：¥#{total.floor}円"
+
+
